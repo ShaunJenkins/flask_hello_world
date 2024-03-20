@@ -19,10 +19,10 @@
         
         {% for livre in livres %}
         <tr>
-            <td>{{ livre[0] }}</td>
-            <td>{{ livre[1] }}</td>
-            <td>{{ livre[2] }}</td>
-            <td>{{ livre[3] }}</td>
+            <td>{{ livre.id }}</td>
+            <td>{{ livre.titre }}</td>
+            <td>{{ livre.auteur }}</td>
+            <td>{{ livre.annee }}</td>
             <td>{{ "Oui" if livre[4] else "Non" }}</td>
         </tr>
         {% endfor %}
