@@ -49,6 +49,29 @@ def Readfiche(post_id):
     # Rendre le template HTML et transmettre les données
     return render_template('read_data.html', data=data)
 
+@app.route('/ajout_livre', methods=['GET', 'POST'])
+def ajout_livre():
+    if request.method == 'POST':
+        titre = request.form['titre']
+        auteur = request.form['auteur']
+        annee = request.form['annee']
+        conn = sqlite3.connect('database.db')
+        cur = conn.cursor()
+        cur.execute("INSERT INTO livres (titre, auteur, annee) VALUES (?, ?, ?)", (titre, auteur, annee))
+        conn.commit()
+        conn.close()
+        return redirect('/base_livres')
+    return render_template('ajout_livre.html')
+
+@app.route('/base_livres')
+def liste_livres():
+    conn = sqlite3.connect('database.db')
+    cur = conn.cursor()
+    cur.execute("SELECT * FROM livres ORDER BY titre ASC")
+    livres = cur.fetchall()
+    conn.close()
+    return render_template('base_livres.html', livres=livres)
+
 @app.route('/consultation/')
 def ReadBDD():
     conn = sqlite3.connect('database.db')
