@@ -64,7 +64,7 @@ def ajout_livre():
     return render_template('ajout_livre.html')
 
 @app.route('/base_livres')
-def liste_livres():
+def base_livres():
     conn = sqlite3.connect('database.db')
     cur = conn.cursor()
     cur.execute("SELECT * FROM livres ORDER BY titre ASC")
